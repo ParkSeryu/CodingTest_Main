@@ -8,19 +8,18 @@ def solution(N, M):
         else:
             D[person] = 1
 
-    answer = list(D.items())
-    answer.sort(key=lambda x: x[0])
+    answer = list()
+    for key, value in D.items():
+        if value == 2:
+            answer.append(key)
+
+    answer.sort()
 
     return answer
 
 
 N, M = map(int, input().split())
 result = solution(N, M)
-k = list()
+print(len(result))
 for i in result:
-    if i[1] == 2:
-        k.append(i[0])
-print(len(k))
-for i in k:
     print(i)
-        
