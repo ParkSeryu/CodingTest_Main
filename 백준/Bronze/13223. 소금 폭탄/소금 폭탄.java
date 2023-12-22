@@ -26,22 +26,19 @@ public class Main {
         return (Integer.parseInt(timeArray[0]) * 3600) + (Integer.parseInt(timeArray[1]) * 60) + (Integer.parseInt(timeArray[2]));
     }
 
-    public static String convertTimeNumberArray(int nowTimeNum, int saltTimeNum){
+    public static String convertTimeNumberArray(int nowTimeNum, int saltTimeNum) {
         int time = saltTimeNum - nowTimeNum;
-        if(time < 0){
+        if (time < 0) {
             time = (3600 * 24) + time;
         }
 
-        if(time == 0){
+        if (time == 0) {
             time = 3600 * 24;
         }
 
-        String hour = String.valueOf(time / 3600);
-        if(hour.length() == 1) hour = "0" + hour;
-        String minute = String.valueOf(time % 3600 / 60);
-        if(minute.length() == 1) minute = "0" + minute;
-        String second = String.valueOf(time % 3600 % 60);
-        if(second.length() == 1) second = "0" + second;
-        return hour + ":" + minute + ":" + second;
+        int hour = time / 3600;
+        int minute = time % 3600 / 60;
+        int second = time % 3600 % 60;
+        return String.format("%02d:%02d:%02d", hour, minute, second);
     }
 }
