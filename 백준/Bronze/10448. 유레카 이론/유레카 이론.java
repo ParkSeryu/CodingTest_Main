@@ -31,12 +31,22 @@ public class Main {
     }
 
     public static void preprocess(ArrayList<Integer> arrayList) {
+        boolean[] isSumofTriangle = new boolean[1001];
+
         for (int i = 0; i < arrayList.size(); i++) {
             for (int j = 0; j < arrayList.size(); j++) {
-                for (int k = 0; k < arrayList.size(); k++) {
-                    int sum = arrayList.get(i) + arrayList.get(j) + arrayList.get(k);
-                    if (sum <= 1000) isEurekaNumber[sum] = true;
+                if (arrayList.get(i) + arrayList.get(j) <= 1000) {
+                    isSumofTriangle[arrayList.get(i) + arrayList.get(j)] = true;
                 }
+            }
+        }
+
+        for (int i = 1; i < isSumofTriangle.length; i++) {
+            if (!isSumofTriangle[i]) continue;
+            for (int j = 0; j < arrayList.size(); j++) {
+                int eurekaNumber = i + arrayList.get(j);
+                if (eurekaNumber > 1000) break;
+                isEurekaNumber[eurekaNumber] = true;
             }
         }
     }
