@@ -2,19 +2,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    
-//    static boolean[] isEurekaNumber = new boolean[1001];
-    
+
+    static boolean[] isEurekaNumber = new boolean[1001];
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> arrayList = new ArrayList<>();
         getTriangleNumbers(arrayList, 1000);
-        
+        preprocess(arrayList);
 
         int K = sc.nextInt();
         while (K-- > 0) {
             int su = sc.nextInt();
-            int answer = isEurekaNumber(arrayList, su);
+            int answer = isEurekaNumber[su] ? 1 : 0;
+
             System.out.println(answer);
         }
     }
@@ -29,24 +30,14 @@ public class Main {
         }
     }
 
-    public static int isEurekaNumber(ArrayList<Integer> arrayList, int su) {
-        int answer = 0;
+    public static void preprocess(ArrayList<Integer> arrayList) {
         for (int i = 0; i < arrayList.size(); i++) {
             for (int j = 0; j < arrayList.size(); j++) {
                 for (int k = 0; k < arrayList.size(); k++) {
-                    if (arrayList.get(i) + arrayList.get(j) + arrayList.get(k) == su) {
-                        answer = 1;
-                        break;
-                    }
+                    int sum = arrayList.get(i) + arrayList.get(j) + arrayList.get(k);
+                    if (sum <= 1000) isEurekaNumber[sum] = true;
                 }
             }
         }
-
-        return answer;
     }
 }
-
-// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-// BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-//            bw.write(a + b + "\n");
-//            bw.flush();
