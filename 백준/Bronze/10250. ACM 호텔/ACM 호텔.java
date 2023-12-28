@@ -1,5 +1,3 @@
-import java.sql.SQLOutput;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -12,30 +10,9 @@ public class Main {
             int W = sc.nextInt();
             int N = sc.nextInt();
 
-            N--;
-            int h = 1;
-            int w = 1;
-
-            while(N-- > 0){
-                h++;
-                if(h == H + 1){
-                    w++;
-                    h = 1;
-                }
-            }
-
-
-            if (w < 10) {
-                System.out.println(h + "0" + w);
-            } else {
-                System.out.println(h + ""  + w);
-            }
-
+            int distance = (N - 1) / H + 1;
+            int floor = (N - 1) % H + 1;
+            System.out.printf("%d%02d\n", floor, distance);
         }
     }
 }
-
-// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-// BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-//            bw.write(a + b + "\n");
-//            bw.flush();
