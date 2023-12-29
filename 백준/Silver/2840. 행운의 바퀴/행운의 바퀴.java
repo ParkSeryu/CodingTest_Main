@@ -8,54 +8,38 @@ public class Main {
         int N = sc.nextInt();
         int K = sc.nextInt();
 
-        String[] luckyWheel = new String[N];
-        Arrays.fill(luckyWheel, "?");
+        char[] wheel = new char[N];
+        Arrays.fill(wheel, '?');
 
-        String answer = "";
+        int curIndex = 0;
 
-        int idx = -1;
         while (K-- > 0) {
-            int S = sc.nextInt();
-            String ch = sc.next();
-            idx += S;
-            while (idx > luckyWheel.length - 1) {
-                idx -= luckyWheel.length;
+            int step = sc.nextInt();
+            char nextAlphabet = sc.next().charAt(0);
+            int nextIndex = ((curIndex - step) % N + N) % N;
+            if (wheel[nextIndex] == '?') wheel[nextIndex] = nextAlphabet;
+            else if (wheel[nextIndex] != nextAlphabet) {
+                System.out.println("!");
+                return;
             }
-            if (!luckyWheel[idx].equals("?") && !luckyWheel[idx].equals(ch)) {
-                answer = "!";
-                break;
-            }
-            luckyWheel[idx] = ch;
+            curIndex = nextIndex;
         }
 
-        for (int i = 0; i < luckyWheel.length; i++) {
-            if (luckyWheel[i].equals("?")) continue;
-            for (int j = 0; j < luckyWheel.length; j++) {
-                if (i == j || luckyWheel[j].equals("?")) continue;
-                if (luckyWheel[i].equals(luckyWheel[j])) {
-                    answer = "!";
-                    break;
-                }
+        boolean[] used = new boolean[26];
+        for (int i = 0; i < N; i++) {
+            if (wheel[i] == '?') continue;
+            if (used[wheel[i] - 'A']) {
+                System.out.println("!");
+                return;
             }
+            used[wheel[i] - 'A'] = true;
         }
 
-        if (!answer.equals("!")) {
-            while (answer.length() < N) {
-                answer += luckyWheel[idx--];
-                if (idx == -1) {
-                    idx = N - 1;
-                }
-            }
+        for (int i = 0; i < N; i++){
+            System.out.print(wheel[(curIndex + i) % N]);
         }
-
-        System.out.println(answer);
+        System.out.println();
 
 
     }
 }
-
-
-// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-// BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-//            bw.write(a + b + "\n");
-//            bw.flush();
