@@ -1,27 +1,37 @@
 import java.util.Scanner;
 
-class Main{
-    public static void main(String args[]){
+public class Main {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String str1 = sc.next();
-        String str2 = sc.next();
-        
-        int length = str2.length() - str1.length();
-		int min = 51;
+        String A = sc.next();
+        String B = sc.next();
 
-		for (int i = 0; i <= length; i++) {
-			int cnt = 0;
-			for (int j = 0; j < str1.length(); j++) {
-				if (str1.charAt(j) != str2.charAt(i + j)) {
-					cnt++;
-				}
+        int answer = 0;
 
-			}
-			if (min > cnt) {
-				min = cnt;
-			}
-		}
-		
-		System.out.println(min);
+        int min = Integer.MAX_VALUE;
+        int idx = 0;
+        while (B.length() - idx >= A.length()) {
+            int temp = 0;
+            for (int i = 0; i < A.length(); i++) {
+                if (B.charAt(idx + i) != A.charAt(i)) {
+                    temp++;
+                }
+            }
+            if (min > temp) {
+                min = temp;
+            }
+            idx++;
+        }
+
+        answer = min;
+
+        System.out.println(answer);
+
+
     }
 }
+
+// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+// BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//            bw.write(a + b + "\n");
+//            bw.flush();
