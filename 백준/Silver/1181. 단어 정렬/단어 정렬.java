@@ -23,9 +23,11 @@ public class Main {
             }
         });
 
-        Set<String> set = new LinkedHashSet<>(List.of(arr));
-        for (String s : set) {
-            System.out.println(s);
+        for(int i = 0; i < arr.length; i++){
+            if(i == 0) System.out.println(arr[i]);
+            else if(!arr[i - 1].equals(arr[i])){
+                System.out.println(arr[i]);
+            }
         }
 
     }
