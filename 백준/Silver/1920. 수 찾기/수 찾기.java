@@ -11,9 +11,9 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        Set<Integer> A = new HashSet<>();
+        int[] A = new int[N];
         for (int i = 0; i < N; i++) {
-            A.add(sc.nextInt());
+            A[i] = sc.nextInt();
         }
 
         int M = sc.nextInt();
@@ -22,16 +22,28 @@ public class Main {
             B[i] = sc.nextInt();
         }
 
-        // Set
+        Arrays.sort(A);
+        // binary search
         for (int i : B) {
-            if (A.contains(i)) {
-                System.out.println(1);
+            System.out.println(binary_search(A, i));
+        }
+    }
+
+    private static int binary_search(int[] A, int find_su) {
+        int start = 0;
+        int end = A.length - 1;
+
+        while (start <= end) {
+            int middle = (start + end) / 2;
+            if (A[middle] == find_su) {
+                return 1;
+            }
+            if (A[middle] > find_su) {
+                end = middle - 1;
             } else {
-                System.out.println(0);
+                start = middle + 1;
             }
         }
-
-        // binary search
-
+        return 0;
     }
 }
