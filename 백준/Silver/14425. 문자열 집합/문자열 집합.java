@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -14,17 +15,32 @@ public class Main {
         }
 
         int result = 0;
-        for(int i = 0; i < M; i++){
+        Arrays.sort(S);
+
+        // binary search
+        for (int i = 0; i < M; i++) {
             String str = sc.next();
-            for(int j = 0; j < N; j++){
-                if(S[j].equals(str)){
-                    result++;
-                    break;
-                }
-            }
+            result += binary_search(S, str);
         }
 
-
         System.out.println(result);
+    }
+
+    private static int binary_search(String[] S, String findStr) {
+        int start = 0;
+        int end = S.length - 1;
+
+        while (start <= end) {
+            int middle = (start + end) / 2;
+            if (S[middle].equals(findStr)) {
+                return 1;
+            }
+            if (S[middle].compareTo(findStr) < 0) {
+                start = middle + 1;
+            } else {
+                end = middle - 1;
+            }
+        }
+        return 0;
     }
 }
